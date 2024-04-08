@@ -1,0 +1,8 @@
+.pageContainer {
+  width: 1100px;
+  margin: 0 auto;
+}
+.adminTop {
+  display: flex;
+  justify-content: space-between;
+}
