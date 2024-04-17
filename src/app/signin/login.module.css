@@ -1,0 +1,67 @@
+.LoginContainer {
+  height: 550px;
+}
+.LoginContainerInner {
+  width: 500px;
+  margin: 0 auto;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.LoginTabContainer {
+  display: flex;
+  padding: 20px 0;
+  justify-content: center;
+  gap: 80px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.LoginTabButton {
+  height: 40px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #707070;
+  transition: color 0.3s ease;
+}
+
+.LoginTabButton.active {
+  color: #1d9bf0;
+}
+
+.LoginFormContainer {
+  background-color: white;
+  padding: 20px;
+}
+
+.LoginFormContainer label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.LoginFormContainer input {
+  width: 100%;
+  height: 40px;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.LoginFormContainer button[type="submit"] {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #1d9bf0;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.LoginFormContainer button[type="submit"]:hover {
+  background-color: #0f7dc2;
+}

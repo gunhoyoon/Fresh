@@ -10,7 +10,7 @@ export const MSWComponent = ({ children }: Props) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-        // require("@/mocks/browser");
+        require("@/mocks/browser");
         const msw = require("msw/browser");
         msw
           .setupWorker(...handlers)
@@ -22,6 +22,7 @@ export const MSWComponent = ({ children }: Props) => {
         setMswReady(false);
       }
     }
+    // 테스트에서 제공하는 목 함수에 내 벨리데이션 함수를 집어넣는다. 테스트 단위를 어디까지 이 친구의 책임인지? 내 역할만 수행하면ㅇㅋ 각 함수가 이어져있다면
   }, []);
   if (!isMswReady) {
     return <div>Loading ...</div>;

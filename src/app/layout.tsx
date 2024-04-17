@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { MSWComponent } from "./_component/MSWComponent";
 import Header from "./_component/header/Header";
+import RQProvider from "./_component/RQProvider";
+import { CookieProvider } from "@/CookieContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <MSWComponent>{children}</MSWComponent>
+        <RQProvider>
+          <MSWComponent>
+            <CookieProvider>
+              <Header />
+              {children}
+            </CookieProvider>
+          </MSWComponent>
+        </RQProvider>
       </body>
     </html>
   );

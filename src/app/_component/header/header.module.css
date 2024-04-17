@@ -22,3 +22,6 @@
   display: flex;
   gap: 12px;
 }
+.authContainer > div {
+  cursor: pointer;
+}
