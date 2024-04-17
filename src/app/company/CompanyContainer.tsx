@@ -1,13 +1,22 @@
+"use client";
 import React from "react";
 import CompanyList from "./CompanyList";
-import Controller from "../_component/controller/controller";
+import Controller from "../admin/_component/controller/controller";
 import styles from "./companyContainer.module.css";
+import { useCookies } from "@/CookieContext";
 export default function CompanyContainer() {
+  const { userType, setUserType } = useCookies();
   return (
     <div className={styles.listContainer}>
-      <Controller />
+      {userType === "" ? (
+        <div>비로그인</div>
+      ) : userType === "user" ? (
+        <div>유저로그인</div>
+      ) : (
+        <div>어드민로그인</div>
+      )}
+      <Controller userType={userType} />
       <CompanyList />
-      {/* <CompanyList /> */}
     </div>
   );
 }

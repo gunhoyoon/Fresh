@@ -24,6 +24,9 @@ export default function SignInPage() {
       setPassword("admin01");
     }
   }, [loginType]);
+  if (userType !== "") {
+    router.push("/");
+  }
 
   const { mutate, isPending } = useMutation({
     mutationFn: async ({ id, password }: LoginRequest) => {

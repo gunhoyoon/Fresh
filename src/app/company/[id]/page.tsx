@@ -9,3 +9,5 @@ export default function DetailPage() {
     </div>
   );
 }
+// 상세는 누구나 접근이 가능
+// 여기서 수정도 가능(물론 어드민만)
