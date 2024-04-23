@@ -3,10 +3,7 @@ import Link from "next/link";
 import React, { FormEventHandler } from "react";
 import styles from "./controller.module.css";
 
-type Props = {
-  userType: string;
-};
-export default function Controller({ userType }: Props) {
+export default function Controller() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
   };
@@ -17,9 +14,8 @@ export default function Controller({ userType }: Props) {
         <input type="text" name="search" />
         <button type="submit">검색하기</button>
       </form>
-      {userType === "admin" && (
-        <Link href={"/admin/company/registration"}>회사 등록하기</Link>
-      )}
+
+      <Link href={"/admin/company/registration"}>회사 등록하기</Link>
     </div>
   );
 }

@@ -2,20 +2,26 @@
 import Link from "next/link";
 import Header from "./_component/header/Header";
 import { useCookies } from "@/CookieContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
   const { userType, setUserType } = useCookies();
+  useEffect(() => {
+    if (userType === "user") {
+      router.replace("/user");
+    }
+    if (userType === "admin") {
+      router.replace("/admin");
+    }
+  }, [userType]);
 
-  return (
-    <div>
-      {userType === "" ? (
-        <div>비로그인</div>
-      ) : userType === "user" ? (
-        <div>유저 로그인</div>
-      ) : (
-        <div>어드민 로그인</div>
-      )}
-    </div>
-  );
+  return <div>비로그인 메인 페이지</div>;
 }
-// 처음 페이지에 접근을 하면 로그인이 됐는지를 확인해서 안됐으면 로그인을 하는 페이지로 보내주는게 맞음
+// 이 페이지는 우리 사이트의 메인 페이지가 될거임
+// 타입을 확인하기 위해서 context api를 확인할 수 밖에 없음
+
+// 유저만 가지고 있는건 내가 좋아요를 누른 회사가 있냐 없냐
+// 비로그인 / 어드민은 좋아요 누른건 없고 그냥 추천회사와 같은 리스트가 나올거임
+//

@@ -1,4 +1,5 @@
 "use client";
+import { initCompanyData } from "@/utils/initCompanyData";
 import { handlers } from "@/mocks/handler";
 import { ReactNode, useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ export const MSWComponent = ({ children }: Props) => {
           .start()
           .then(() => {
             setMswReady(true);
+            initCompanyData();
           });
       } else {
         setMswReady(false);
@@ -36,3 +38,5 @@ export const MSWComponent = ({ children }: Props) => {
 // 그리고 서비스 워커 등록하는 작업이 비동기로 작동하므로 애플리케이션 렌더링을 그때까지 연기하는게 좋음
 
 // 그래서 msw 상태를 하나 만들어서, start가 성공적으로 된 후에 true로 바꿔줌, 이 전에는 로딩
+
+// initCompany

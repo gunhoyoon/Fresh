@@ -1,6 +1,5 @@
 "use client";
 
-import { delay } from "@/\butils/delay";
 import { LoginRequest } from "@/model/LoginRequest";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -24,10 +23,12 @@ export default function SignInPage() {
       setPassword("admin01");
     }
   }, [loginType]);
-  if (userType !== "") {
-    router.push("/");
-  }
-
+  useEffect(() => {
+    if (userType !== "") {
+      router.push("/");
+    }
+  }, [userType]);
+  // 렌더링 중 redirect 하는것에 관한 war 방지
   const { mutate, isPending } = useMutation({
     mutationFn: async ({ id, password }: LoginRequest) => {
       // await delay(2000);

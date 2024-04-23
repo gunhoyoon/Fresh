@@ -1,0 +1,71 @@
+.mainContainer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+  /* background-color: plum; */
+  overflow: hidden;
+}
+.mainContainer ul li {
+  display: inline-block;
+  width: 250px;
+  padding: 20px 0;
+  cursor: pointer;
+  position: relative;
+}
+.mainContainer ul li a {
+  height: 100%;
+}
+/* 리스트를 호버했을 때 image에 아래와 같이 적용 */
+.mainContainer ul li:hover img {
+  transform: scale(1.05);
+}
+.mainContainer ul li img {
+  width: 100%;
+  height: 200px;
+  transition: transform 0.2s;
+  margin-bottom: 6px;
+  border-radius: 12px;
+}
+.companyDes {
+  padding: 20 0px;
+}
+.mainContainer section {
+  margin-bottom: 60px;
+}
+.mainContainer section h2 {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.companyTitle {
+  font-size: 14px;
+  color: rgba(55, 56, 60, 0.61);
+}
+.successBonus {
+  position: absolute;
+  top: 10%;
+  left: 3%;
+  z-index: 10;
+  color: gray;
+  font-weight: 500;
+}
+.imgContainer {
+  margin-bottom: 60px;
+
+  position: relative;
+}
+.imgContainer h3 {
+  position: absolute;
+  font-size: 24px;
+  color: white;
+  top: 8%;
+  left: 3%;
+}
+.imgContainer img {
+  width: 100%;
+  border-radius: 12px;
+  height: 250px;
+}

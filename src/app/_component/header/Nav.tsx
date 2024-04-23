@@ -5,7 +5,7 @@ export default function Nav() {
   return (
     <ul className={styles.navContainer}>
       <li>
-        <Link href={"/"}>1번으로 이동</Link>
+        <Link href={"/admin/company"}>채용 전체보기</Link>
       </li>
       <li>
         <Link href={"/"}>2번으로 이동</Link>

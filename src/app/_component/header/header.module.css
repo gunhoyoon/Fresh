@@ -22,6 +22,6 @@
   display: flex;
   gap: 12px;
 }
-.authContainer > div {
+.logoutButton {
   cursor: pointer;
 }

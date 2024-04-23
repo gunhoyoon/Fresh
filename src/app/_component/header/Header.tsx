@@ -12,12 +12,6 @@ export default function Header() {
   const queryClient = useQueryClient();
   const { userType, setUserType } = useCookies();
 
-  // const { data } = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: async () => {
-  //     return queryClient.getQueryData(["user"]);
-  //   },
-  // });
   const logout = useMutation({
     mutationFn: async () => {
       const response = await fetch(
@@ -51,7 +45,12 @@ export default function Header() {
         <Nav />
         <div className={styles.authContainer}>
           {userType !== "" ? (
-            <div onClick={onLogout}>로그아웃</div>
+            <>
+              <div>{userType}님 반갑습니다</div>
+              <div className={styles.logoutButton} onClick={onLogout}>
+                로그아웃
+              </div>
+            </>
           ) : (
             <Link href={"/signin"}>로그인하기</Link>
           )}

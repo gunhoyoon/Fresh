@@ -1,11 +1,5 @@
 import React from "react";
-import CompanyContainer from "./CompanyContainer";
 
-export default function page() {
-  return (
-    <>
-      <CompanyContainer />
-    </>
-  );
+export default function CompanyPage() {
+  return <div>page</div>;
 }
-// ssr
