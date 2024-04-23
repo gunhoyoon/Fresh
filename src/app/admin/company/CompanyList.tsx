@@ -19,7 +19,7 @@ export default function CompanyList({ companyData }: Props) {
             <li
               key={company.companyId}
               onClick={() => {
-                router.push(`admin/company/${company.companyId}`);
+                router.push(`/admin/company/${company.companyId}`);
               }}
             >
               {/* <Link href={`admin/company/${company.companyId}`}> */}
