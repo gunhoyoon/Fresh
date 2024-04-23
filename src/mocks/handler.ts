@@ -282,9 +282,19 @@ export const handlers = [
     });
   }),
   // 어드민은 포스트하고 추가된 데이터까지 리턴하면 되지만 유저나 비로그인은 본인이 추가할 수 없기 때문에, 새로 가져와야함, 아 일단 어드민부터..
-  http.get("/api/company", async () => {
+  http.get("/api/admin/company/:id", async ({ params }) => {
+    const { id } = params;
+    console.log("id", id);
     const initData = localStorage.getItem(companyKey) || "[]";
-    return new HttpResponse(JSON.stringify(initData), {
+    const rawData = JSON.parse(initData);
+    // const findCompany = rawData.find(
+    //   (v: CompanyDataType) => v.companyId === id
+    // );
+    const findCompany = rawData.filter(
+      (v: CompanyDataType) => v.companyId === id
+    );
+
+    return new HttpResponse(JSON.stringify(findCompany), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
