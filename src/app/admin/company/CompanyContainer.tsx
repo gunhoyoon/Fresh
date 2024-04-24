@@ -3,11 +3,12 @@ import React from "react";
 import CompanyList from "./CompanyList";
 import styles from "./companyContainer.module.css";
 import Controller from "../_component/controller/controller";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { initCompanyData } from "@/\butils/initCompanyData";
 import { CompanyDataType } from "@/model/CompanyData";
 
 export default function CompanyContainer() {
+  const queryClient = useQueryClient();
   // 여기서 회사 데이터 요청
   const { data: companyData, isPending } = useQuery<CompanyDataType[]>({
     queryKey: ["company"],
@@ -19,16 +20,43 @@ export default function CompanyContainer() {
   // 해당 데이터를 리스트에 내려준다.
   // 삭제나 뭐 다른것들을 컨테이너에서 하고 리스트는 오직 보여주는것만 할거임(아이템당 좋아요나)
   // 컨테이너에서 메인 페이지
+
+  const search = useMutation({
+    mutationFn: async (searchTerm: string) => {
+      const searchData = await fetch(
+        `/api/admin/searchCompany?searchTerm=${searchTerm}`,
+        {
+          method: "GET",
+        }
+      );
+      if (!searchData.ok) {
+        throw new Error("에러발생 !!");
+      }
+      return searchData.json();
+    },
+    onSuccess: (data) => {
+      console.log("data", data);
+      queryClient.setQueryData(["company"], data);
+      // queryClient.invalidateQueries({ queryKey: ["company"] });
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+  const onSearch = (searchTerm: string) => {
+    search.mutate(searchTerm);
+  };
   if (isPending) {
     return <div>로딩중 ...</div>;
   }
+
   if (!companyData) {
     return null;
   }
   // 뮤텡
   return (
     <div className={styles.listContainer}>
-      <Controller />
+      <Controller onSearch={onSearch} />
       <CompanyList companyData={companyData} />
     </div>
   );

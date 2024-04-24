@@ -2,6 +2,7 @@ import { CompanyDataType } from "@/model/CompanyData";
 import { LoginRequest } from "@/model/LoginRequest";
 import { raw } from "express";
 import { http, HttpResponse } from "msw";
+import { collectGenerateParams } from "next/dist/build/utils";
 import { requestToBodyStream } from "next/dist/server/body-streams";
 import { v4 as uuid } from "uuid";
 
@@ -301,6 +302,31 @@ export const handlers = [
         "Content-Type": "application/json",
       },
     });
+  }),
+  http.get("/api/admin/searchCompany", async ({ request }) => {
+    const url = new URL(request.url);
+    const initData = localStorage.getItem(companyKey) as string;
+
+    const searchTerm = url?.searchParams.get("searchTerm");
+    if (searchTerm) {
+      const copyData: CompanyDataType[] = JSON.parse(initData);
+      const searchData = copyData.filter((company: CompanyDataType) =>
+        company.companyName.includes(searchTerm as string)
+      );
+      return new HttpResponse(JSON.stringify(searchData), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else {
+      return new HttpResponse(initData, {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
   }),
   http.put("/api/admin/company", async ({ request }) => {
     const newData = (await request.json()) as CompanyDataType;
