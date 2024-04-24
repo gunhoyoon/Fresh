@@ -7,6 +7,9 @@ export default function Controller() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
   };
+  // 여기선 검색할 아이템, 그 벨류만 전달해주면 됨. 그러니까 컨테이너에서 벨류 받을 함수하나 내려주면 거기에 전달하면 됨
+  // 그리고 컨테이너에서 그 조건에 맞는 회사를 리스트에 전달하는거임,
+  // 검색어를 요청한다.
   return (
     <div className={styles.controllerContainer}>
       <form className={styles.searchForm} onSubmit={handleSubmit}>

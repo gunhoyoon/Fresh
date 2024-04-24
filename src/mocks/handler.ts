@@ -328,4 +328,25 @@ export const handlers = [
       },
     });
   }),
+  http.delete("/api/admin/delCompany", async ({ request }) => {
+    const url = new URL(request.url);
+    const companyId = url.searchParams.get("id") || [];
+    if (!companyId) {
+      return new HttpResponse("Company ID is required", {
+        status: 400,
+      });
+    }
+    const initData = localStorage.getItem(companyKey) || "[]";
+    const rawData: CompanyDataType[] = JSON.parse(initData);
+
+    const filterData = rawData.filter(
+      (company) => company.companyId !== companyId
+    );
+    console.log("filterData", filterData);
+
+    localStorage.setItem(companyKey, JSON.stringify(filterData));
+    return new HttpResponse(JSON.stringify(filterData), {
+      status: 200,
+    });
+  }),
 ];

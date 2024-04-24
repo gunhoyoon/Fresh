@@ -65,7 +65,7 @@ export default function CompanyDetail() {
       putMutate(updatedData); // 객체를 직접 전달
     }
   };
-  const handlerCancel: MouseEventHandler<HTMLButtonElement> = () => {
+  const handleCancel: MouseEventHandler<HTMLButtonElement> = () => {
     setModify(false);
   };
   const queryClient = useQueryClient();
@@ -98,7 +98,7 @@ export default function CompanyDetail() {
         }
         return company;
       });
-      // queryClient.setQueryData(["company", id], updatedData);
+      queryClient.setQueryData(["company", id], updatedData);
       // 값은 바꾸지만 즉각적용이 안됨 - 서버와의 동기화가 안된다.
       queryClient.invalidateQueries({ queryKey: ["company"] });
       setModify(false);
@@ -107,18 +107,27 @@ export default function CompanyDetail() {
     },
     onError: () => {},
   });
+  const handleDel = () => {
+    delMutate(id);
+  };
   const { mutate: delMutate } = useMutation({
     mutationFn: async (id: string) => {
-      const response = await fetch(`/api/admin/delCompany?id=${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/delCompany?id=${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!response.ok) {
         throw new Error("Request failed with status " + response.status);
       }
       return response.json();
     },
     onSuccess: (data) => {
-      console.log("삭제 성공");
+      console.log("data", data);
+      queryClient.invalidateQueries({ queryKey: ["company"] });
+      alert("삭제 성공");
+      router.replace("/admin/company");
     },
     onError: () => {
       console.log("삭제 실패");
@@ -197,9 +206,9 @@ export default function CompanyDetail() {
         <button onClick={handleModify}>수정</button>
       )}
       {modify ? (
-        <button onClick={handlerCancel}>취소</button>
+        <button onClick={handleCancel}>취소</button>
       ) : (
-        <button>삭제</button>
+        <button onClick={handleDel}>삭제</button>
       )}
       {/* <button>삭제</button> */}
     </div>

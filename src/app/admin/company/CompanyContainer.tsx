@@ -25,6 +25,7 @@ export default function CompanyContainer() {
   if (!companyData) {
     return null;
   }
+  // 뮤텡
   return (
     <div className={styles.listContainer}>
       <Controller />
