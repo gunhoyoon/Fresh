@@ -375,4 +375,8 @@ export const handlers = [
       status: 200,
     });
   }),
+  http.post("/api/admin/addCompany", async ({}) => {
+    // 포스트 데이터 전달해서, 입력받은 값 이번엔 formData 사용해서, 하나씩 꺼내서 객체로 만들어서
+    // 기존 로컬 데이터에 push 하고 전체 반환 . queryKey = company 로 업데이트 / 추가 되었습니다 - 홈으로 redirect
+  }),
 ];

@@ -200,16 +200,26 @@ export default function CompanyDetail() {
             </div>
           </div>
         ))}
-      {modify ? (
-        <button onClick={handleSubmit}>저장</button>
-      ) : (
-        <button onClick={handleModify}>수정</button>
-      )}
-      {modify ? (
-        <button onClick={handleCancel}>취소</button>
-      ) : (
-        <button onClick={handleDel}>삭제</button>
-      )}
+      <div className={styles.buttonContainer}>
+        {modify ? (
+          <button className={styles.btnSubmit} onClick={handleSubmit}>
+            저장
+          </button>
+        ) : (
+          <button className={styles.btnModify} onClick={handleModify}>
+            수정
+          </button>
+        )}
+        {modify ? (
+          <button className={styles.btnCancel} onClick={handleCancel}>
+            취소
+          </button>
+        ) : (
+          <button className={styles.btnDelete} onClick={handleDel}>
+            삭제
+          </button>
+        )}
+      </div>
       {/* <button>삭제</button> */}
     </div>
   );
