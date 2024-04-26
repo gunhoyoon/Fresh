@@ -286,7 +286,7 @@ export const handlers = [
   // 어드민은 포스트하고 추가된 데이터까지 리턴하면 되지만 유저나 비로그인은 본인이 추가할 수 없기 때문에, 새로 가져와야함, 아 일단 어드민부터..
   http.get("/api/admin/company/:id", async ({ params }) => {
     const { id } = params;
-    console.log("id", id);
+    // console.log("id", id);
     const initData = localStorage.getItem(companyKey) || "[]";
     const rawData = JSON.parse(initData);
     // const findCompany = rawData.find(
@@ -330,7 +330,7 @@ export const handlers = [
   }),
   http.put("/api/admin/company", async ({ request }) => {
     const newData = (await request.json()) as CompanyDataType;
-    console.log("newData", newData);
+    // console.log("newData", newData);
     const initData = localStorage.getItem(companyKey) || "[]";
     const rawData: CompanyDataType[] = JSON.parse(initData);
     const findDataIndex = rawData.findIndex(
@@ -368,15 +368,28 @@ export const handlers = [
     const filterData = rawData.filter(
       (company) => company.companyId !== companyId
     );
-    console.log("filterData", filterData);
+    // console.log("filterData", filterData);
 
     localStorage.setItem(companyKey, JSON.stringify(filterData));
     return new HttpResponse(JSON.stringify(filterData), {
       status: 200,
     });
   }),
-  http.post("/api/admin/addCompany", async ({}) => {
+  http.post("/api/admin/addCompany", async ({ request }) => {
+    const formData = await request.formData();
+
+    const companyName = formData.get("companyName");
+    const benefits = formData.get("benefits");
+    const location = formData.get("location");
+    const description = formData.get("description");
+    console.log("companyName", companyName);
+    console.log("benefits", benefits);
+    console.log("location", location);
+    console.log("description", description);
     // 포스트 데이터 전달해서, 입력받은 값 이번엔 formData 사용해서, 하나씩 꺼내서 객체로 만들어서
     // 기존 로컬 데이터에 push 하고 전체 반환 . queryKey = company 로 업데이트 / 추가 되었습니다 - 홈으로 redirect
+    return new HttpResponse("나에게 닿기를", {
+      status: 200,
+    });
   }),
 ];
